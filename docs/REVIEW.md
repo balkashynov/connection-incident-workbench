@@ -13,8 +13,8 @@ The forwarding case demonstrates a concrete increment over a peer ping or source
 - Collection and route selection are still manual. This is the main usability cost to validate with prospective users before adding more features.
 - The lab's QueryDNS failure must be explained prominently. The test name is supplied through hosts files; the healthy control does not establish Tailscale DNS health. The demo now states this beside the comparison table.
 - A reviewer previously had to reconstruct the comparison from individual artifacts. `make demo` now replays the healthy, source-only, paired, recovered and exported cases without a new network experiment. It produces new files and checks the expected findings.
-- Export preserves identity relationships and findings. It is pseudonymization, not complete anonymization: platform, timing, ports and topology remain. Published raw example addresses/names belong only to the disposable lab.
-- Public material excludes personal machine/account planning and the original local Git history. Collector, analyzer, evidence validation, redaction and report implementation are unchanged from the reviewed local source snapshot.
+- Export preserves identity relationships and findings. It is pseudonymization, not complete anonymization: platform, timing, ports and topology remain. The raw example addresses/names in this package belong only to the disposable lab.
+- The publication package excludes personal machine/account planning and the original local Git history. Collector, analyzer, evidence validation, redaction and report implementation are unchanged from the reviewed local source snapshot.
 
 ## Verification boundary
 
