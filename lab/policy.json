@@ -1,0 +1,4 @@
+{
+  "acls": [{"action": "accept", "src": ["*"], "dst": ["*:*"]}],
+  "autoApprovers": {"routes": {"172.30.96.0/24": ["lab@"]}}
+}

@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-14",
+  "environment": "go version go1.27.1 darwin/arm64",
+  "source_snapshot": "7adbda7688447f083ef23a9fb6fc3a62280a7afa",
+  "commands": [
+    {
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-count=1",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 3.284
+    },
+    {
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "exit_code": 0,
+      "seconds": 0.398
+    },
+    {
+      "command": [
+        "make",
+        "demo"
+      ],
+      "exit_code": 0,
+      "seconds": 1.452
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/verify_artifacts.py",
+        "examples/lab-run"
+      ],
+      "exit_code": 0,
+      "seconds": 0.045
+    }
+  ],
+  "implementation_files_identical_to_source_snapshot": 12,
+  "replayed_html_identical_to_saved": [
+    "examples/lab-run/D1/export.html",
+    "examples/lab-run/D1/incident.html",
+    "examples/lab-run/D1-recovered/export.html",
+    "examples/lab-run/D1-recovered/incident.html",
+    "examples/lab-run/H1/export.html",
+    "examples/lab-run/H1/incident.html",
+    "examples/lab-run/R1/export.html",
+    "examples/lab-run/R1/incident.html",
+    "examples/lab-run/R1-recovered/export.html",
+    "examples/lab-run/R1-recovered/incident.html",
+    "examples/lab-run/S1/export.html",
+    "examples/lab-run/S1/incident.html",
+    "examples/lab-run/S1-recovered/export.html",
+    "examples/lab-run/S1-recovered/incident.html"
+  ],
+  "public_text_scan": "passed: no personal filesystem paths, planning references or detected credential material",
+  "relative_document_links": "passed",
+  "prior_live_lab": "retained, not rerun in this review",
+  "browser_interaction": "not executed; offline-rendered preview inspected",
+  "source_sha256": {
+    "internal/workbench/workbench_test.go": "97aec1fe31cf7199025f0df962117d8298834d3ef3e7ef4a96f150d06016befc",
+    "internal/workbench/collect.go": "5d20927780b187ab2289f6c8511b8f80a7c0be9a29f18e3b68c4edff89a88ebd",
+    "internal/workbench/redact.go": "0ede1a8fd569f4f48c4d0bcaf08a61689b90da8588e038881c833c8e1d35d40c",
+    "internal/workbench/analyze.go": "53accafa5f7d6631b7617a2a6af28e8527e53af297f3dad0d4a2d54d0ccd0645",
+    "internal/workbench/report.html": "bb2bf8beedb22620ba493bd4adb6c64168c759a31e4878c4c79d34bb4c566e42",
+    "internal/workbench/report.go": "c643a003b5b04be852551ea2fd949de71a49bf56da37660860f7c9130eb5a021",
+    "internal/workbench/evidence.go": "529824763f020eb00ee6e898d9e9da050ad42e59ccbaa0e311c6f997bba0beb3",
+    "internal/workbench/report_test.go": "a95adcb550048047dc9aa6d1701d97267ea3f9fea7b905da46b97a4abe5ab6fb",
+    "cmd/connection-workbench/main.go": "30c967cdaed596e3635223b3863821d43e02fee44e620e79e69d0fa05ca07106",
+    "cmd/connection-workbench/main_test.go": "b036662900f5ed8e4ceba87c5d1773bd0f36d97c54f5a7001bc87519ff0fb0bb",
+    "go.mod": "8ecf6a9ee6188cf156829b2251de6ae44a7b2e01c722ff6aa3b0389d14b17511",
+    "go.sum": "658d9ca3023571ae60701c128f2a8d5cf57a107c575414c9ec6bf6dc699315b6"
+  }
+}

@@ -1,0 +1,622 @@
+{
+  "status": "passed",
+  "environment": "Docker Linux ARM64 on one macOS host; Headscale 0.29.5; Tailscale client/daemon/relay 1.104.1",
+  "limits": [
+    "Not Tailscale SaaS",
+    "Not separate physical networks",
+    "Not macOS Tailscale daemon integration",
+    "No application protocol checks or destination listener evidence"
+  ],
+  "results": [
+    {
+      "scenario": "H1",
+      "rules": [
+        "source.tcp_connected"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "R1",
+      "rules": [
+        "router.forwarding_disabled",
+        "path.forwarding_hypothesis",
+        "source.tcp_unresolved"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "timed_out",
+            "facts": {
+              "tcp": "timeout"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": false
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "R1-recovered",
+      "rules": [
+        "source.tcp_connected"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "D1",
+      "rules": [
+        "source.dns_failure",
+        "path.source_dns_difference",
+        "source.tcp_connected"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "failed",
+            "facts": {}
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "D1-recovered",
+      "rules": [
+        "source.tcp_connected"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "S1",
+      "rules": [
+        "router.tcp_refused",
+        "source.tcp_unresolved"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "failed",
+            "facts": {
+              "tcp": "refused"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "failed",
+            "facts": {
+              "tcp": "refused"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "S1-recovered",
+      "rules": [
+        "source.tcp_connected"
+      ],
+      "probes": {
+        "source": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.2"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "observed",
+            "facts": {
+              "node": "100.64.0.1",
+              "path": "direct"
+            }
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "not_collected",
+            "facts": {}
+          }
+        },
+        "router": {
+          "daemon": {
+            "state": "observed",
+            "facts": {
+              "backend": "Running",
+              "daemon_version": "1.104.1-t9a522a978",
+              "node": "100.64.0.1"
+            }
+          },
+          "dns_os": {
+            "state": "observed",
+            "facts": {
+              "addresses": [
+                "172.30.96.10"
+              ]
+            }
+          },
+          "dns_tailscale": {
+            "state": "failed",
+            "facts": {}
+          },
+          "peer": {
+            "state": "not_collected",
+            "facts": {}
+          },
+          "tcp": {
+            "state": "observed",
+            "facts": {
+              "tcp": "connected"
+            }
+          },
+          "forwarding": {
+            "state": "observed",
+            "facts": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "observations": 12
+    },
+    {
+      "scenario": "P1",
+      "denied_probes": [
+        "dns_tailscale"
+      ],
+      "observations": 6
+    }
+  ]
+}

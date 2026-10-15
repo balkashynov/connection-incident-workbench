@@ -1,0 +1,9 @@
+/bin/
+/lab/certs/
+/lab/results/
+*.sock
+.DS_Store
+
+__pycache__/
+
+/demo-output/

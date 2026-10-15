@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.1.0",
+  "client_version": "1.104.1",
+  "bundle_id": "router-ad414fdf798a5309",
+  "incident_id": "H1",
+  "role": "router",
+  "platform": "linux",
+  "machine": "100.64.0.1",
+  "target": {
+    "host": "db.lab",
+    "address": "172.30.96.10",
+    "port": 8080
+  },
+  "start": "2026-10-14T22:39:57.438729924Z",
+  "end": "2026-10-14T22:39:57.440500549Z",
+  "synthetic": false,
+  "redaction": "local",
+  "observations": [
+    {
+      "id": "daemon",
+      "kind": "daemon",
+      "method": "localapi.status",
+      "state": "observed",
+      "start": "2026-10-14T22:39:57.438741132Z",
+      "end": "2026-10-14T22:39:57.439744132Z",
+      "duration_ms": 1,
+      "facts": {
+        "backend": "Running",
+        "daemon_version": "1.104.1-t9a522a978",
+        "node": "100.64.0.1"
+      }
+    },
+    {
+      "id": "dns_os",
+      "kind": "dns_os",
+      "method": "os.lookup_ip",
+      "state": "observed",
+      "start": "2026-10-14T22:39:57.439749007Z",
+      "end": "2026-10-14T22:39:57.439943007Z",
+      "duration_ms": 0,
+      "facts": {
+        "addresses": [
+          "172.30.96.10"
+        ]
+      }
+    },
+    {
+      "id": "dns_tailscale",
+      "kind": "dns_tailscale",
+      "method": "localapi.query_dns",
+      "state": "failed",
+      "start": "2026-10-14T22:39:57.439943341Z",
+      "end": "2026-10-14T22:39:57.440150257Z",
+      "duration_ms": 0,
+      "error_code": "lookup_failed",
+      "facts": {}
+    },
+    {
+      "id": "peer",
+      "kind": "peer",
+      "method": "localapi.ping.disco",
+      "state": "not_collected",
+      "start": "2026-10-14T22:39:57.440150549Z",
+      "end": "2026-10-14T22:39:57.440151216Z",
+      "duration_ms": 0,
+      "error_code": "not_requested",
+      "facts": {}
+    },
+    {
+      "id": "tcp",
+      "kind": "tcp",
+      "method": "os.tcp_dial",
+      "state": "observed",
+      "start": "2026-10-14T22:39:57.440151424Z",
+      "end": "2026-10-14T22:39:57.440475507Z",
+      "duration_ms": 0,
+      "facts": {
+        "tcp": "connected"
+      }
+    },
+    {
+      "id": "forwarding",
+      "kind": "forwarding",
+      "method": "linux.proc_sys",
+      "state": "observed",
+      "start": "2026-10-14T22:39:57.440479049Z",
+      "end": "2026-10-14T22:39:57.440500299Z",
+      "duration_ms": 0,
+      "facts": {
+        "enabled": true
+      }
+    }
+  ]
+}

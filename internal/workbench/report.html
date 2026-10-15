@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Connection incident | Workbench</title>
+<style>
+:root{color-scheme:light;--ink:#152d36;--muted:#526871;--line:#cad5d9;--paper:#f4f7f7;--accent:#145e68}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);font:15px/1.6 system-ui,sans-serif;color:var(--ink);overflow-wrap:anywhere}
+main{max-width:1180px;margin:auto;padding:44px 32px 80px}
+header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:28px}
+.eyebrow{font:600 12px/1.4 ui-monospace,monospace;letter-spacing:.13em;color:var(--accent);text-transform:uppercase}
+h1{font-size:42px;line-height:1.15;letter-spacing:-.04em;margin:14px 0}
+h2{font-size:22px;letter-spacing:-.02em;margin:34px 0 14px}
+h3{font-size:18px;line-height:1.4;margin:10px 0}
+.muted{color:var(--muted)}
+.badge{display:inline-block;max-width:100%;font:600 11px/1.5 ui-monospace,monospace;border:1px solid var(--line);padding:3px 8px;border-radius:4px;background:white;letter-spacing:.02em}
+nav{margin-top:18px}nav a{display:inline-block;margin:0 18px 4px 0}
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.segment,.finding{min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}
+.segment strong{display:block;margin:10px 0}.segment p{margin:0;color:var(--muted);font-size:13px}
+.findings{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+.finding{width:49%;margin-bottom:16px}.finding.error{border-top:4px solid #ad422b}.finding.warning{border-top:4px solid #b58127}.finding.info{border-top:4px solid #438087}
+.finding p{margin:8px 0}.finding .next{border-top:1px solid #e5ebed;padding-top:12px}
+.evidence{margin:12px 0 0}.evidence a{display:inline-block;margin:0 10px 5px 0;font:12px/1.6 ui-monospace,monospace}
+a{color:#0a606d;text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+code{font:12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere}
+table{border-collapse:collapse;table-layout:fixed;width:100%;background:white;font-size:13px}
+caption{text-align:left;color:var(--muted);padding:0 0 8px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+th:nth-child(1){width:30%}th:nth-child(2){width:22%}th:nth-child(3){width:35%}th:nth-child(4){width:13%}
+td p{margin:0}tr:target{background:#fff3c9;outline:2px solid #b58127;outline-offset:-2px}
+details{margin-top:12px}summary{cursor:pointer}.limits{background:#e8eff0;border-radius:8px;padding:20px 24px}.limits p{margin:8px 0}
+footer{margin-top:32px;font-size:12px;color:var(--muted)}
+@media(max-width:760px){
+ main{padding:24px 16px 48px}h1{font-size:32px}.path{grid-template-columns:1fr}.findings{display:block}.finding{width:100%}
+ table,caption,tbody,tr,td{display:block;width:100%}
+ thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+ tr{border:1px solid var(--line);margin-bottom:12px;border-radius:4px}
+ td{border:0;padding:8px 14px}td:last-child{padding-bottom:14px}
+ td::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--muted);letter-spacing:.05em}
+}
+@media print{main{padding:20px}.segment,.finding,tr{break-inside:avoid}nav{display:none}}
+</style>
+</head>
+<body><main>
+{{$bundles:=.Bundles}}{{$source:=bundle .Bundles "source"}}{{$router:=bundle .Bundles "router"}}
+<header>
+<div class="eyebrow">Connection workbench / saved incident</div><h1>Follow the evidence.</h1>
+<p class="muted">{{$source.Target.Host}}:{{$source.Target.Port}} · explicit destination {{$source.Target.Address}} · incident {{$source.IncidentID}}</p>
+<span class="badge">{{if $source.Synthetic}}SYNTHETIC EXAMPLE{{else}}COLLECTED EVIDENCE{{end}}</span> <span class="badge">{{label $source.Redaction}}</span>
+<nav aria-label="Report sections"><a href="#findings">Findings</a><a href="#ledger">Observations</a><a href="#coverage">Coverage and limits</a></nav>
+</header>
+<h2>Connection path</h2><p class="muted">Logical checks for one requested connection. Outcomes describe the saved collection windows.</p>
+<div class="path">
+<div class="segment"><span class="eyebrow">01 / Source resolver</span><strong>{{outcome (obs $source "dns_os")}}</strong><p>OS lookup for the requested name. Tailscale DNS is a separate observation.</p></div>
+<div class="segment"><span class="eyebrow">02 / Selected peer</span><strong>{{outcome (obs $source "peer")}}</strong><p>{{$source.Router}}{{with (obs $source "peer").Facts.Path}} · {{label .}}{{end}}<br>Diagnostic ping does not prove TCP connectivity.</p></div>
+<div class="segment"><span class="eyebrow">03 / Subnet router</span><strong>{{if $router}}{{outcome (obs $router "forwarding")}}{{else}}Not collected{{end}}</strong><p>{{if $router}}Router TCP: {{outcome (obs $router "tcp")}}.<br>{{end}}Route selection remains operator-supplied.</p></div>
+<div class="segment"><span class="eyebrow">04 / Destination TCP</span><strong>{{outcome (obs $source "tcp")}}</strong><p>{{$source.Target.Address}}:{{$source.Target.Port}}<br>No application request or listener inspection.</p></div>
+</div>
+<h2 id="findings">Findings <span class="badge">{{len .Findings}}</span></h2>
+<div class="findings">{{range .Findings}}
+<article class="finding {{.Severity}}"><span class="badge">{{label .Severity}} · {{label .Category}}</span><h3>{{.Summary}}</h3>
+<div class="evidence">{{range .Evidence}}<a href="#{{.}}" title="{{.}}">{{evidenceLabel $bundles .}}</a>{{end}}</div>
+<p class="next"><strong>Next check</strong><br>{{.NextCheck}}</p>
+{{if .Alternatives}}<details open><summary>Limits and alternatives</summary>{{range .Alternatives}}<p class="muted">{{.}}</p>{{end}}</details>{{end}}
+<p class="muted"><code>{{.RuleID}} / v{{.RuleVersion}}</code></p></article>{{end}}</div>
+<h2 id="ledger">Observation ledger</h2>
+{{range .Bundles}}
+<h3>{{label .Role}} · <code>{{.Machine}}</code></h3>
+<p class="muted">{{.Platform}} · LocalAPI client {{.ClientVersion}} · {{.Start.Format "2006-01-02 15:04:05Z07:00"}} to {{.End.Format "2006-01-02 15:04:05Z07:00"}}</p>
+<table role="table"><caption>{{label .Role}} observations</caption><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">Observation</th><th role="columnheader" scope="col">State</th><th role="columnheader" scope="col">Typed facts</th><th role="columnheader" scope="col">Duration</th></tr></thead>
+<tbody role="rowgroup">{{$bundle:=.}}{{range .Observations}}
+<tr role="row" id="{{ref $bundle .}}">
+<td role="cell" data-label="Observation"><code>{{.ID}}</code><br>{{.Method}}</td>
+<td role="cell" data-label="State">{{label .State}}{{if .ErrorCode}}<br><code>{{.ErrorCode}}</code>{{end}}</td>
+<td role="cell" data-label="Typed facts">{{with .Facts}}<p>{{.Backend}} {{.DaemonVersion}} {{.Node}} {{.Path}} {{.TCP}}</p>{{if .Enabled}}<p>Forwarding: {{.Enabled}}</p>{{end}}{{range .Addresses}}<p><code>{{.}}</code></p>{{end}}{{end}}</td>
+<td role="cell" data-label="Duration">{{.DurationMS}} ms</td>
+</tr>{{end}}</tbody></table>{{end}}
+<h2 id="coverage">Coverage and interpretation</h2><div class="limits">{{range .Limitations}}<p>{{.}}</p>{{end}}</div>
+<footer>Offline report · No scripts, telemetry, remote assets or automatic remediation. Pseudonymization removes identifiers, not timing or network-structure sensitivity. Review before sharing.</footer>
+</main></body></html>

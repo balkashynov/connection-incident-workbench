@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "tool_version": "0.1.0",
+  "client_version": "1.104.1",
+  "bundle_id": "source-535247310c48b497",
+  "incident_id": "S1",
+  "role": "source",
+  "platform": "linux",
+  "machine": "100.64.0.2",
+  "selected_router": "100.64.0.1",
+  "target": {
+    "host": "db.lab",
+    "address": "172.30.96.10",
+    "port": 8080
+  },
+  "start": "2026-10-14T22:40:35.032803344Z",
+  "end": "2026-10-14T22:40:35.035133469Z",
+  "synthetic": false,
+  "redaction": "local",
+  "observations": [
+    {
+      "id": "daemon",
+      "kind": "daemon",
+      "method": "localapi.status",
+      "state": "observed",
+      "start": "2026-10-14T22:40:35.032812469Z",
+      "end": "2026-10-14T22:40:35.033910928Z",
+      "duration_ms": 1,
+      "facts": {
+        "backend": "Running",
+        "daemon_version": "1.104.1-t9a522a978",
+        "node": "100.64.0.2"
+      }
+    },
+    {
+      "id": "dns_os",
+      "kind": "dns_os",
+      "method": "os.lookup_ip",
+      "state": "observed",
+      "start": "2026-10-14T22:40:35.033911678Z",
+      "end": "2026-10-14T22:40:35.034147761Z",
+      "duration_ms": 0,
+      "facts": {
+        "addresses": [
+          "172.30.96.10"
+        ]
+      }
+    },
+    {
+      "id": "dns_tailscale",
+      "kind": "dns_tailscale",
+      "method": "localapi.query_dns",
+      "state": "failed",
+      "start": "2026-10-14T22:40:35.034148303Z",
+      "end": "2026-10-14T22:40:35.034390511Z",
+      "duration_ms": 0,
+      "error_code": "lookup_failed",
+      "facts": {}
+    },
+    {
+      "id": "peer",
+      "kind": "peer",
+      "method": "localapi.ping.disco",
+      "state": "observed",
+      "start": "2026-10-14T22:40:35.034391094Z",
+      "end": "2026-10-14T22:40:35.034756803Z",
+      "duration_ms": 0,
+      "facts": {
+        "node": "100.64.0.1",
+        "path": "direct"
+      }
+    },
+    {
+      "id": "tcp",
+      "kind": "tcp",
+      "method": "os.tcp_dial",
+      "state": "failed",
+      "start": "2026-10-14T22:40:35.034757178Z",
+      "end": "2026-10-14T22:40:35.035131178Z",
+      "duration_ms": 0,
+      "error_code": "refused",
+      "facts": {
+        "tcp": "refused"
+      }
+    },
+    {
+      "id": "forwarding",
+      "kind": "forwarding",
+      "method": "linux.proc_sys",
+      "state": "not_collected",
+      "start": "2026-10-14T22:40:35.035132094Z",
+      "end": "2026-10-14T22:40:35.035133136Z",
+      "duration_ms": 0,
+      "error_code": "not_requested",
+      "facts": {}
+    }
+  ]
+}

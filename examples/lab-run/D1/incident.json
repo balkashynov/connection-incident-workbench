@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "bundles": [
+    {
+      "schema_version": 1,
+      "tool_version": "0.1.0",
+      "client_version": "1.104.1",
+      "bundle_id": "source-37faa08c4db2d6df",
+      "incident_id": "D1",
+      "role": "source",
+      "platform": "linux",
+      "machine": "100.64.0.2",
+      "selected_router": "100.64.0.1",
+      "target": {
+        "host": "db.lab",
+        "address": "172.30.96.10",
+        "port": 8080
+      },
+      "start": "2026-10-14T22:40:33.965361052Z",
+      "end": "2026-10-14T22:40:33.967509135Z",
+      "synthetic": false,
+      "redaction": "local",
+      "observations": [
+        {
+          "id": "daemon",
+          "kind": "daemon",
+          "method": "localapi.status",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.965364802Z",
+          "end": "2026-10-14T22:40:33.96635151Z",
+          "duration_ms": 0,
+          "facts": {
+            "backend": "Running",
+            "daemon_version": "1.104.1-t9a522a978",
+            "node": "100.64.0.2"
+          }
+        },
+        {
+          "id": "dns_os",
+          "kind": "dns_os",
+          "method": "os.lookup_ip",
+          "state": "failed",
+          "start": "2026-10-14T22:40:33.966352094Z",
+          "end": "2026-10-14T22:40:33.96690551Z",
+          "duration_ms": 0,
+          "error_code": "lookup_failed",
+          "facts": {}
+        },
+        {
+          "id": "dns_tailscale",
+          "kind": "dns_tailscale",
+          "method": "localapi.query_dns",
+          "state": "failed",
+          "start": "2026-10-14T22:40:33.966906427Z",
+          "end": "2026-10-14T22:40:33.967068844Z",
+          "duration_ms": 0,
+          "error_code": "lookup_failed",
+          "facts": {}
+        },
+        {
+          "id": "peer",
+          "kind": "peer",
+          "method": "localapi.ping.disco",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.967069552Z",
+          "end": "2026-10-14T22:40:33.967273385Z",
+          "duration_ms": 0,
+          "facts": {
+            "node": "100.64.0.1",
+            "path": "direct"
+          }
+        },
+        {
+          "id": "tcp",
+          "kind": "tcp",
+          "method": "os.tcp_dial",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.967273594Z",
+          "end": "2026-10-14T22:40:33.967506219Z",
+          "duration_ms": 0,
+          "facts": {
+            "tcp": "connected"
+          }
+        },
+        {
+          "id": "forwarding",
+          "kind": "forwarding",
+          "method": "linux.proc_sys",
+          "state": "not_collected",
+          "start": "2026-10-14T22:40:33.967508094Z",
+          "end": "2026-10-14T22:40:33.96750901Z",
+          "duration_ms": 0,
+          "error_code": "not_requested",
+          "facts": {}
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "tool_version": "0.1.0",
+      "client_version": "1.104.1",
+      "bundle_id": "router-34487cb90399f376",
+      "incident_id": "D1",
+      "role": "router",
+      "platform": "linux",
+      "machine": "100.64.0.1",
+      "target": {
+        "host": "db.lab",
+        "address": "172.30.96.10",
+        "port": 8080
+      },
+      "start": "2026-10-14T22:40:33.965388927Z",
+      "end": "2026-10-14T22:40:33.96705851Z",
+      "synthetic": false,
+      "redaction": "local",
+      "observations": [
+        {
+          "id": "daemon",
+          "kind": "daemon",
+          "method": "localapi.status",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.965391552Z",
+          "end": "2026-10-14T22:40:33.966672385Z",
+          "duration_ms": 1,
+          "facts": {
+            "backend": "Running",
+            "daemon_version": "1.104.1-t9a522a978",
+            "node": "100.64.0.1"
+          }
+        },
+        {
+          "id": "dns_os",
+          "kind": "dns_os",
+          "method": "os.lookup_ip",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.96667276Z",
+          "end": "2026-10-14T22:40:33.96674476Z",
+          "duration_ms": 0,
+          "facts": {
+            "addresses": [
+              "172.30.96.10"
+            ]
+          }
+        },
+        {
+          "id": "dns_tailscale",
+          "kind": "dns_tailscale",
+          "method": "localapi.query_dns",
+          "state": "failed",
+          "start": "2026-10-14T22:40:33.966745177Z",
+          "end": "2026-10-14T22:40:33.966923177Z",
+          "duration_ms": 0,
+          "error_code": "lookup_failed",
+          "facts": {}
+        },
+        {
+          "id": "peer",
+          "kind": "peer",
+          "method": "localapi.ping.disco",
+          "state": "not_collected",
+          "start": "2026-10-14T22:40:33.966923719Z",
+          "end": "2026-10-14T22:40:33.96692476Z",
+          "duration_ms": 0,
+          "error_code": "not_requested",
+          "facts": {}
+        },
+        {
+          "id": "tcp",
+          "kind": "tcp",
+          "method": "os.tcp_dial",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.966924927Z",
+          "end": "2026-10-14T22:40:33.967043302Z",
+          "duration_ms": 0,
+          "facts": {
+            "tcp": "connected"
+          }
+        },
+        {
+          "id": "forwarding",
+          "kind": "forwarding",
+          "method": "linux.proc_sys",
+          "state": "observed",
+          "start": "2026-10-14T22:40:33.967044135Z",
+          "end": "2026-10-14T22:40:33.967058344Z",
+          "duration_ms": 0,
+          "facts": {
+            "enabled": true
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "source.dns_failure",
+      "rule_version": 1,
+      "severity": "warning",
+      "category": "supported_hypothesis",
+      "summary": "Source name resolution failed while the explicit IP accepted TCP.",
+      "evidence": [
+        "source-37faa08c4db2d6df/dns_os",
+        "source-37faa08c4db2d6df/tcp"
+      ],
+      "alternatives": [
+        "The supplied IP may differ from the intended answer; this does not establish a tailnet-wide DNS failure."
+      ],
+      "next_check": "Inspect the source resolver configuration and compare the same name on the router."
+    },
+    {
+      "rule_id": "path.source_dns_difference",
+      "rule_version": 1,
+      "severity": "warning",
+      "category": "supported_hypothesis",
+      "summary": "The router resolves the requested name to the tested IP while the source cannot resolve it.",
+      "evidence": [
+        "source-37faa08c4db2d6df/dns_os",
+        "source-37faa08c4db2d6df/tcp",
+        "router-34487cb90399f376/dns_os"
+      ],
+      "alternatives": [
+        "This may be an intentional resolver difference; Tailscale's DNS implementation is not proven faulty."
+      ],
+      "next_check": "Compare source and router resolver paths, search domains and split-DNS configuration."
+    },
+    {
+      "rule_id": "source.tcp_connected",
+      "rule_version": 1,
+      "severity": "info",
+      "category": "healthy_check",
+      "summary": "The explicit destination IP accepted a TCP connection from the source.",
+      "evidence": [
+        "source-37faa08c4db2d6df/tcp"
+      ],
+      "alternatives": [
+        "A TCP handshake does not verify an application response or name resolution."
+      ],
+      "next_check": "Check the application protocol separately if requests still fail."
+    }
+  ],
+  "limitations": [
+    "This is a logical check path, not a packet trace. Router selection is supplied by the operator.",
+    "Route approval, effective access policy, application health and destination listener state were not collected.",
+    "Checks describe saved collection windows. Machine clocks are not assumed synchronized; no causal ordering is inferred."
+  ]
+}

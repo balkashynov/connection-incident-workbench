@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-14",
+  "commands": [
+    "make test",
+    "make lab",
+    "python3 scripts/verify_artifacts.py lab/results/20261014223947405463"
+  ],
+  "results": {
+    "race_tests": "passed",
+    "go_vet": "passed",
+    "lab": "passed",
+    "artifact_checks": "7 incidents / 14 HTML reports passed"
+  },
+  "source_sha256": {
+    "go.mod": "8ecf6a9ee6188cf156829b2251de6ae44a7b2e01c722ff6aa3b0389d14b17511",
+    "Makefile": "4851685cd017a8a934fc88901f3a9d60ee02b37ee0a942f27c43c91e69dceee8",
+    "go.sum": "658d9ca3023571ae60701c128f2a8d5cf57a107c575414c9ec6bf6dc699315b6",
+    "lab/build.py": "e6880fdfd99ede8f6e65a700f0910becaf4d8642b207992bf839ae82552ccac8",
+    "lab/policy.json": "97eabb031f8f885587bb0982105a9c38662676520f0c354a4d5ca47104dfc6f8",
+    "lab/run.py": "1e18fca4fb66992215f7c454681e23551c98de2bc1849d121bc6947d8adbfcec",
+    "lab/derp.yaml": "f518030f950fe6ff7dfed12dc6bd2b16c0cb32c4dea2188f565bd982f1dc0af0",
+    "lab/compose.yaml": "b3df2d03a20afe509b7118e423e88c385c2ae16e3c106c8eb65d20d65cc66b34",
+    "lab/headscale.yaml": "75b5df2364d62e0410debf34c35c6475bac6a040de439e013061f3aaed7e0f82",
+    "internal/workbench/workbench_test.go": "97aec1fe31cf7199025f0df962117d8298834d3ef3e7ef4a96f150d06016befc",
+    "internal/workbench/collect.go": "5d20927780b187ab2289f6c8511b8f80a7c0be9a29f18e3b68c4edff89a88ebd",
+    "internal/workbench/redact.go": "0ede1a8fd569f4f48c4d0bcaf08a61689b90da8588e038881c833c8e1d35d40c",
+    "internal/workbench/analyze.go": "53accafa5f7d6631b7617a2a6af28e8527e53af297f3dad0d4a2d54d0ccd0645",
+    "internal/workbench/report.go": "622c13627ee664bda0b64b1e9cf279d75273d30a92367c660e52c8e97643d5fd",
+    "internal/workbench/evidence.go": "529824763f020eb00ee6e898d9e9da050ad42e59ccbaa0e311c6f997bba0beb3",
+    "cmd/connection-workbench/main.go": "30c967cdaed596e3635223b3863821d43e02fee44e620e79e69d0fa05ca07106",
+    "cmd/connection-workbench/main_test.go": "b036662900f5ed8e4ceba87c5d1773bd0f36d97c54f5a7001bc87519ff0fb0bb"
+  },
+  "image_digests": {
+    "tailscale/tailscale:v1.104.1": "sha256:87c55d6be56ad85b3d8bceca5f87f73de288c609131460dd1be1874c250cc41d",
+    "headscale/headscale:0.29.5": "sha256:780ed2f9e85719a2211277433f2c8afb45105d0d25031949a6848a485f9e216d",
+    "node:20-bookworm-slim": "sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5febfc0"
+  }
+}

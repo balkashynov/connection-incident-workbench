@@ -1,0 +1,57 @@
+services:
+  derp:
+    image: tailscale/tailscale:v1.104.1
+    entrypoint: /derper
+    command: ["-a=:443", "-http-port=-1", "-certmode=manual", "-certdir=/certs", "-hostname=derp", "-c=/tmp/derper.key"]
+    volumes:
+      - ../bin/derper:/derper:ro
+      - ./certs:/certs:ro
+    networks: [transit]
+  control:
+    image: headscale/headscale:0.29.5
+    command: serve
+    volumes:
+      - ./headscale.yaml:/etc/headscale/config.yaml:ro
+      - ./derp.yaml:/etc/headscale/derp.yaml:ro
+      - ./policy.json:/etc/headscale/policy.json:ro
+      - control-state:/var/lib/headscale
+    networks: [transit]
+  source:
+    image: tailscale/tailscale:v1.104.1
+    entrypoint: tailscaled
+    command: ["--state=/tmp/tailscaled.state", "--socket=/tmp/tailscaled.sock", "--no-logs-no-support"]
+    cap_add: [NET_ADMIN]
+    devices: [/dev/net/tun:/dev/net/tun]
+    volumes:
+      - ../bin/connection-workbench-linux:/workbench:ro
+    extra_hosts: ["db.lab:172.30.96.10"]
+    networks: [transit]
+  router:
+    image: tailscale/tailscale:v1.104.1
+    entrypoint: tailscaled
+    command: ["--state=/var/lib/tailscale/tailscaled.state", "--socket=/tmp/tailscaled.sock", "--no-logs-no-support"]
+    cap_add: [NET_ADMIN]
+    devices: [/dev/net/tun:/dev/net/tun]
+    sysctls:
+      net.ipv4.ip_forward: "${TCW_FORWARDING:-1}"
+    volumes:
+      - router-state:/var/lib/tailscale
+      - ../bin/connection-workbench-linux:/workbench:ro
+    extra_hosts: ["db.lab:172.30.96.10"]
+    networks: [transit, service]
+  service:
+    image: node:20-bookworm-slim
+    command: ["node", "-e", "const s=require('http').createServer((q,r)=>r.end('tcw-lab-service'));s.listen(8080,'0.0.0.0');process.on('SIGUSR2',()=>s.listening?s.close():s.listen(8080,'0.0.0.0'));setInterval(()=>{},1000)"]
+    networks:
+      service:
+        ipv4_address: 172.30.96.10
+networks:
+  transit:
+    internal: true
+  service:
+    internal: true
+    ipam:
+      config: [{subnet: 172.30.96.0/24}]
+volumes:
+  control-state:
+  router-state:
