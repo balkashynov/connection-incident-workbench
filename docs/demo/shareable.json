@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "bundles": [
+    {
+      "schema_version": 1,
+      "tool_version": "0.1.0",
+      "client_version": "omitted",
+      "bundle_id": "bundle-1",
+      "incident_id": "incident-1",
+      "role": "source",
+      "platform": "linux",
+      "machine": "entity-1",
+      "selected_router": "entity-2",
+      "target": {
+        "host": "entity-3",
+        "address": "entity-4",
+        "port": 8080
+      },
+      "start": "2026-10-14T22:40:14.951887418Z",
+      "end": "2026-10-14T22:40:16.960087044Z",
+      "synthetic": false,
+      "redaction": "pseudonymized",
+      "observations": [
+        {
+          "id": "daemon",
+          "kind": "daemon",
+          "method": "localapi.status",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.951890876Z",
+          "end": "2026-10-14T22:40:14.953044126Z",
+          "duration_ms": 1,
+          "facts": {
+            "backend": "Running",
+            "daemon_version": "omitted",
+            "node": "entity-1"
+          }
+        },
+        {
+          "id": "dns_os",
+          "kind": "dns_os",
+          "method": "os.lookup_ip",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.953044793Z",
+          "end": "2026-10-14T22:40:14.953263585Z",
+          "duration_ms": 0,
+          "facts": {
+            "addresses": [
+              "entity-4"
+            ]
+          }
+        },
+        {
+          "id": "dns_tailscale",
+          "kind": "dns_tailscale",
+          "method": "localapi.query_dns",
+          "state": "failed",
+          "start": "2026-10-14T22:40:14.953264126Z",
+          "end": "2026-10-14T22:40:14.953425501Z",
+          "duration_ms": 0,
+          "error_code": "lookup_failed",
+          "facts": {}
+        },
+        {
+          "id": "peer",
+          "kind": "peer",
+          "method": "localapi.ping.disco",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.953426418Z",
+          "end": "2026-10-14T22:40:14.953789126Z",
+          "duration_ms": 0,
+          "facts": {
+            "node": "entity-2",
+            "path": "direct"
+          }
+        },
+        {
+          "id": "tcp",
+          "kind": "tcp",
+          "method": "os.tcp_dial",
+          "state": "timed_out",
+          "start": "2026-10-14T22:40:14.95379896Z",
+          "end": "2026-10-14T22:40:16.960040961Z",
+          "duration_ms": 2006,
+          "error_code": "timeout",
+          "facts": {
+            "tcp": "timeout"
+          }
+        },
+        {
+          "id": "forwarding",
+          "kind": "forwarding",
+          "method": "linux.proc_sys",
+          "state": "not_collected",
+          "start": "2026-10-14T22:40:16.960050502Z",
+          "end": "2026-10-14T22:40:16.960085919Z",
+          "duration_ms": 0,
+          "error_code": "not_requested",
+          "facts": {}
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "tool_version": "0.1.0",
+      "client_version": "omitted",
+      "bundle_id": "bundle-2",
+      "incident_id": "incident-1",
+      "role": "router",
+      "platform": "linux",
+      "machine": "entity-2",
+      "target": {
+        "host": "entity-3",
+        "address": "entity-4",
+        "port": 8080
+      },
+      "start": "2026-10-14T22:40:14.95109721Z",
+      "end": "2026-10-14T22:40:14.953606751Z",
+      "synthetic": false,
+      "redaction": "pseudonymized",
+      "observations": [
+        {
+          "id": "daemon",
+          "kind": "daemon",
+          "method": "localapi.status",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.951105085Z",
+          "end": "2026-10-14T22:40:14.953005918Z",
+          "duration_ms": 1,
+          "facts": {
+            "backend": "Running",
+            "daemon_version": "omitted",
+            "node": "entity-2"
+          }
+        },
+        {
+          "id": "dns_os",
+          "kind": "dns_os",
+          "method": "os.lookup_ip",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.95300646Z",
+          "end": "2026-10-14T22:40:14.953095335Z",
+          "duration_ms": 0,
+          "facts": {
+            "addresses": [
+              "entity-4"
+            ]
+          }
+        },
+        {
+          "id": "dns_tailscale",
+          "kind": "dns_tailscale",
+          "method": "localapi.query_dns",
+          "state": "failed",
+          "start": "2026-10-14T22:40:14.953095626Z",
+          "end": "2026-10-14T22:40:14.953313751Z",
+          "duration_ms": 0,
+          "error_code": "lookup_failed",
+          "facts": {}
+        },
+        {
+          "id": "peer",
+          "kind": "peer",
+          "method": "localapi.ping.disco",
+          "state": "not_collected",
+          "start": "2026-10-14T22:40:14.953314293Z",
+          "end": "2026-10-14T22:40:14.953315543Z",
+          "duration_ms": 0,
+          "error_code": "not_requested",
+          "facts": {}
+        },
+        {
+          "id": "tcp",
+          "kind": "tcp",
+          "method": "os.tcp_dial",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.953315668Z",
+          "end": "2026-10-14T22:40:14.953534043Z",
+          "duration_ms": 0,
+          "facts": {
+            "tcp": "connected"
+          }
+        },
+        {
+          "id": "forwarding",
+          "kind": "forwarding",
+          "method": "linux.proc_sys",
+          "state": "observed",
+          "start": "2026-10-14T22:40:14.95353521Z",
+          "end": "2026-10-14T22:40:14.953606418Z",
+          "duration_ms": 0,
+          "facts": {
+            "enabled": false
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "rule_id": "router.forwarding_disabled",
+      "rule_version": 1,
+      "severity": "error",
+      "category": "established_failure",
+      "summary": "IP forwarding is disabled on the observed Linux router for the target address family.",
+      "evidence": [
+        "bundle-2/forwarding"
+      ],
+      "alternatives": [
+        "This configuration observation alone does not prove which router the source selected or exclude policy and routing problems."
+      ],
+      "next_check": "Verify that this is the router used by the target route; enable forwarding through your normal change process if appropriate."
+    },
+    {
+      "rule_id": "path.forwarding_hypothesis",
+      "rule_version": 1,
+      "severity": "error",
+      "category": "supported_hypothesis",
+      "summary": "Disabled forwarding can explain why the source cannot reach a service that the selected router can reach.",
+      "evidence": [
+        "bundle-1/peer",
+        "bundle-1/tcp",
+        "bundle-2/forwarding",
+        "bundle-2/tcp"
+      ],
+      "alternatives": [
+        "Route selection, access policy, filtering and return routing remain unverified."
+      ],
+      "next_check": "Verify route selection, then restore forwarding on the disposable router and repeat the same probes."
+    },
+    {
+      "rule_id": "source.tcp_unresolved",
+      "rule_version": 1,
+      "severity": "warning",
+      "category": "inconclusive",
+      "summary": "Source TCP connectivity failed; the available probes do not establish a unique root cause.",
+      "evidence": [
+        "bundle-1/tcp"
+      ],
+      "alternatives": [
+        "Forwarding, routes, filtering, return routing and service availability can cause similar symptoms."
+      ],
+      "next_check": "Inspect router-to-destination evidence, route selection and destination listener state."
+    }
+  ],
+  "limitations": [
+    "This is a logical check path, not a packet trace. Router selection is supplied by the operator.",
+    "Route approval, effective access policy, application health and destination listener state were not collected.",
+    "Checks describe saved collection windows. Machine clocks are not assumed synchronized; no causal ordering is inferred."
+  ]
+}

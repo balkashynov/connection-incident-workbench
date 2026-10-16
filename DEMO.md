@@ -1,5 +1,7 @@
 # A peer ping works. The service connection does not.
 
+**[Open the interactive recorded demo](https://balkashynov.github.io/connection-incident-workbench/)**. No installation is needed.
+
 This three-minute demo investigates one routed connection using evidence collected on its source and Linux subnet router. It shows the additional conclusion supported by the router bundle, and what the tool refuses to conclude without it.
 
 The evidence was collected from real Tailscale v1.104.1 daemons, Headscale 0.29.5 and a disposable TCP service in isolated containers on one Mac. These are saved observations from a controlled lab, not a live customer incident or a Tailscale-service deployment.

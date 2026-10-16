@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Connection incident | Workbench</title>
+<style>
+:root{color-scheme:light;--ink:#152d36;--muted:#526871;--line:#cad5d9;--paper:#f4f7f7;--accent:#145e68}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);font:15px/1.6 system-ui,sans-serif;color:var(--ink);overflow-wrap:anywhere}
+main{max-width:1180px;margin:auto;padding:44px 32px 80px}
+header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:28px}
+.eyebrow{font:600 12px/1.4 ui-monospace,monospace;letter-spacing:.13em;color:var(--accent);text-transform:uppercase}
+h1{font-size:42px;line-height:1.15;letter-spacing:-.04em;margin:14px 0}
+h2{font-size:22px;letter-spacing:-.02em;margin:34px 0 14px}
+h3{font-size:18px;line-height:1.4;margin:10px 0}
+.muted{color:var(--muted)}
+.badge{display:inline-block;max-width:100%;font:600 11px/1.5 ui-monospace,monospace;border:1px solid var(--line);padding:3px 8px;border-radius:4px;background:white;letter-spacing:.02em}
+nav{margin-top:18px}nav a{display:inline-block;margin:0 18px 4px 0}
+.path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.segment,.finding{min-width:0;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px}
+.segment strong{display:block;margin:10px 0}.segment p{margin:0;color:var(--muted);font-size:13px}
+.findings{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+.finding{width:49%;margin-bottom:16px}.finding.error{border-top:4px solid #ad422b}.finding.warning{border-top:4px solid #b58127}.finding.info{border-top:4px solid #438087}
+.finding p{margin:8px 0}.finding .next{border-top:1px solid #e5ebed;padding-top:12px}
+.evidence{margin:12px 0 0}.evidence a{display:inline-block;margin:0 10px 5px 0;font:12px/1.6 ui-monospace,monospace}
+a{color:#0a606d;text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+code{font:12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere}
+table{border-collapse:collapse;table-layout:fixed;width:100%;background:white;font-size:13px}
+caption{text-align:left;color:var(--muted);padding:0 0 8px}
+th,td{padding:12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+th:nth-child(1){width:30%}th:nth-child(2){width:22%}th:nth-child(3){width:35%}th:nth-child(4){width:13%}
+td p{margin:0}tr:target{background:#fff3c9;outline:2px solid #b58127;outline-offset:-2px}
+details{margin-top:12px}summary{cursor:pointer}.limits{background:#e8eff0;border-radius:8px;padding:20px 24px}.limits p{margin:8px 0}
+footer{margin-top:32px;font-size:12px;color:var(--muted)}
+@media(max-width:760px){
+ main{padding:24px 16px 48px}h1{font-size:32px}.path{grid-template-columns:1fr}.findings{display:block}.finding{width:100%}
+ table,caption,tbody,tr,td{display:block;width:100%}
+ thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+ tr{border:1px solid var(--line);margin-bottom:12px;border-radius:4px}
+ td{border:0;padding:8px 14px}td:last-child{padding-bottom:14px}
+ td::before{content:attr(data-label);display:block;font-size:11px;font-weight:600;text-transform:uppercase;color:var(--muted);letter-spacing:.05em}
+}
+@media print{main{padding:20px}.segment,.finding,tr{break-inside:avoid}nav{display:none}}
+</style>
+</head>
+<body><main>
+
+<header>
+<div class="eyebrow">Connection workbench / saved incident</div><h1>Follow the evidence.</h1>
+<p class="muted">entity-3:8080 · explicit destination entity-4 · incident incident-1</p>
+<span class="badge">COLLECTED EVIDENCE</span> <span class="badge">Pseudonymized</span>
+<nav aria-label="Report sections"><a href="#findings">Findings</a><a href="#ledger">Observations</a><a href="#coverage">Coverage and limits</a></nav>
+</header>
+<h2>Connection path</h2><p class="muted">Logical checks for one requested connection. Outcomes describe the saved collection windows.</p>
+<div class="path">
+<div class="segment"><span class="eyebrow">01 / Source resolver</span><strong>Resolved</strong><p>OS lookup for the requested name. Tailscale DNS is a separate observation.</p></div>
+<div class="segment"><span class="eyebrow">02 / Selected peer</span><strong>Peer replied</strong><p>entity-2 · Direct<br>Diagnostic ping does not prove TCP connectivity.</p></div>
+<div class="segment"><span class="eyebrow">03 / Subnet router</span><strong>Forwarding disabled</strong><p>Router TCP: Connected.<br>Route selection remains operator-supplied.</p></div>
+<div class="segment"><span class="eyebrow">04 / Destination TCP</span><strong>Timed out</strong><p>entity-4:8080<br>No application request or listener inspection.</p></div>
+</div>
+<h2 id="findings">Findings <span class="badge">3</span></h2>
+<div class="findings">
+<article class="finding error"><span class="badge">Error · Established failure</span><h3>IP forwarding is disabled on the observed Linux router for the target address family.</h3>
+<div class="evidence"><a href="#bundle-2%2fforwarding" title="bundle-2/forwarding">Router / Forwarding</a></div>
+<p class="next"><strong>Next check</strong><br>Verify that this is the router used by the target route; enable forwarding through your normal change process if appropriate.</p>
+<details open><summary>Limits and alternatives</summary><p class="muted">This configuration observation alone does not prove which router the source selected or exclude policy and routing problems.</p></details>
+<p class="muted"><code>router.forwarding_disabled / v1</code></p></article>
+<article class="finding error"><span class="badge">Error · Supported hypothesis</span><h3>Disabled forwarding can explain why the source cannot reach a service that the selected router can reach.</h3>
+<div class="evidence"><a href="#bundle-1%2fpeer" title="bundle-1/peer">Source / Peer</a><a href="#bundle-1%2ftcp" title="bundle-1/tcp">Source / TCP</a><a href="#bundle-2%2fforwarding" title="bundle-2/forwarding">Router / Forwarding</a><a href="#bundle-2%2ftcp" title="bundle-2/tcp">Router / TCP</a></div>
+<p class="next"><strong>Next check</strong><br>Verify route selection, then restore forwarding on the disposable router and repeat the same probes.</p>
+<details open><summary>Limits and alternatives</summary><p class="muted">Route selection, access policy, filtering and return routing remain unverified.</p></details>
+<p class="muted"><code>path.forwarding_hypothesis / v1</code></p></article>
+<article class="finding warning"><span class="badge">Warning · Inconclusive</span><h3>Source TCP connectivity failed; the available probes do not establish a unique root cause.</h3>
+<div class="evidence"><a href="#bundle-1%2ftcp" title="bundle-1/tcp">Source / TCP</a></div>
+<p class="next"><strong>Next check</strong><br>Inspect router-to-destination evidence, route selection and destination listener state.</p>
+<details open><summary>Limits and alternatives</summary><p class="muted">Forwarding, routes, filtering, return routing and service availability can cause similar symptoms.</p></details>
+<p class="muted"><code>source.tcp_unresolved / v1</code></p></article></div>
+<h2 id="ledger">Observation ledger</h2>
+
+<h3>Source · <code>entity-1</code></h3>
+<p class="muted">linux · LocalAPI client omitted · 2026-10-14 22:40:14Z to 2026-10-14 22:40:16Z</p>
+<table role="table"><caption>Source observations</caption><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">Observation</th><th role="columnheader" scope="col">State</th><th role="columnheader" scope="col">Typed facts</th><th role="columnheader" scope="col">Duration</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row" id="bundle-1/daemon">
+<td role="cell" data-label="Observation"><code>daemon</code><br>localapi.status</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>Running omitted entity-1  </p></td>
+<td role="cell" data-label="Duration">1 ms</td>
+</tr>
+<tr role="row" id="bundle-1/dns_os">
+<td role="cell" data-label="Observation"><code>dns_os</code><br>os.lookup_ip</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>    </p><p><code>entity-4</code></p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-1/dns_tailscale">
+<td role="cell" data-label="Observation"><code>dns_tailscale</code><br>localapi.query_dns</td>
+<td role="cell" data-label="State">Failed<br><code>lookup_failed</code></td>
+<td role="cell" data-label="Typed facts"><p>    </p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-1/peer">
+<td role="cell" data-label="Observation"><code>peer</code><br>localapi.ping.disco</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>  entity-2 direct </p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-1/tcp">
+<td role="cell" data-label="Observation"><code>tcp</code><br>os.tcp_dial</td>
+<td role="cell" data-label="State">Timed out<br><code>timeout</code></td>
+<td role="cell" data-label="Typed facts"><p>    timeout</p></td>
+<td role="cell" data-label="Duration">2006 ms</td>
+</tr>
+<tr role="row" id="bundle-1/forwarding">
+<td role="cell" data-label="Observation"><code>forwarding</code><br>linux.proc_sys</td>
+<td role="cell" data-label="State">Not collected<br><code>not_requested</code></td>
+<td role="cell" data-label="Typed facts"><p>    </p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr></tbody></table>
+<h3>Router · <code>entity-2</code></h3>
+<p class="muted">linux · LocalAPI client omitted · 2026-10-14 22:40:14Z to 2026-10-14 22:40:14Z</p>
+<table role="table"><caption>Router observations</caption><thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">Observation</th><th role="columnheader" scope="col">State</th><th role="columnheader" scope="col">Typed facts</th><th role="columnheader" scope="col">Duration</th></tr></thead>
+<tbody role="rowgroup">
+<tr role="row" id="bundle-2/daemon">
+<td role="cell" data-label="Observation"><code>daemon</code><br>localapi.status</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>Running omitted entity-2  </p></td>
+<td role="cell" data-label="Duration">1 ms</td>
+</tr>
+<tr role="row" id="bundle-2/dns_os">
+<td role="cell" data-label="Observation"><code>dns_os</code><br>os.lookup_ip</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>    </p><p><code>entity-4</code></p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-2/dns_tailscale">
+<td role="cell" data-label="Observation"><code>dns_tailscale</code><br>localapi.query_dns</td>
+<td role="cell" data-label="State">Failed<br><code>lookup_failed</code></td>
+<td role="cell" data-label="Typed facts"><p>    </p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-2/peer">
+<td role="cell" data-label="Observation"><code>peer</code><br>localapi.ping.disco</td>
+<td role="cell" data-label="State">Not collected<br><code>not_requested</code></td>
+<td role="cell" data-label="Typed facts"><p>    </p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-2/tcp">
+<td role="cell" data-label="Observation"><code>tcp</code><br>os.tcp_dial</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>    connected</p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr>
+<tr role="row" id="bundle-2/forwarding">
+<td role="cell" data-label="Observation"><code>forwarding</code><br>linux.proc_sys</td>
+<td role="cell" data-label="State">Observed</td>
+<td role="cell" data-label="Typed facts"><p>    </p><p>Forwarding: false</p></td>
+<td role="cell" data-label="Duration">0 ms</td>
+</tr></tbody></table>
+<h2 id="coverage">Coverage and interpretation</h2><div class="limits"><p>This is a logical check path, not a packet trace. Router selection is supplied by the operator.</p><p>Route approval, effective access policy, application health and destination listener state were not collected.</p><p>Checks describe saved collection windows. Machine clocks are not assumed synchronized; no causal ordering is inferred.</p></div>
+<footer>Offline report · No scripts, telemetry, remote assets or automatic remediation. Pseudonymization removes identifiers, not timing or network-structure sensitivity. Review before sharing.</footer>
+</main></body></html>

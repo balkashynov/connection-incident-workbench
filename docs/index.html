@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compare source-only and paired subnet-router evidence from a real Tailscale lab. Inspect the findings, recovery, and shareable report without installing anything.">
+  <meta property="og:title" content="A ping works. The connection doesn't.">
+  <meta property="og:description" content="One destination, two evidence bundles, and a clearer next check. Explore a recorded Tailscale troubleshooting case.">
+  <meta property="og:type" content="website">
+  <title>Connection Incident Workbench | Recorded demo</title>
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#investigation">Skip to the investigation</a>
+  <header class="top"><a class="wordmark" href="./">CONNECTION WORKBENCH</a><a href="https://github.com/balkashynov/connection-incident-workbench">Source on GitHub ↗</a></header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">A RECORDED TROUBLESHOOTING CASE</p>
+      <h1>A ping works.<br>The connection doesn't.</h1>
+      <p class="intro">A source machine can reach its subnet router, but cannot connect to a service behind it. Bring evidence from both machines into one report to narrow down what to check next.</p>
+      <div class="tags"><span>Real Tailscale daemons</span><span>Saved lab evidence</span><span>No install needed</span></div>
+    </section>
+
+    <section id="investigation" aria-labelledby="investigation-title">
+      <div class="section-head"><div><p class="eyebrow">01 / CHANGE THE EVIDENCE</p><h2 id="investigation-title">What can we actually conclude?</h2></div><p>Start with the source. Add the router. Compare the recorded recovery.</p></div>
+      <nav class="cases" aria-label="Recorded evidence cases">
+        <a href="#source-only" data-case="source-only" aria-current="true">1. Source only</a>
+        <a href="#paired" data-case="paired">2. Add router evidence</a>
+        <a href="#recovered" data-case="recovered">3. After recovery</a>
+        <a href="#healthy" data-case="healthy">Healthy control</a>
+        <a href="#shareable" data-case="shareable">Shareable export</a>
+      </nav>
+      <div class="investigation">
+        <div class="evidence-card">
+          <p class="eyebrow">OBSERVED CHECKS</p>
+          <h3>Same destination. Two viewpoints.</h3>
+          <dl class="checks" id="checks"><div><dt>Loading saved observations</dt><dd>…</dd></div></dl>
+          <p class="small">The selected router is supplied by the operator. These are logical checks, not a packet trace.</p>
+        </div>
+        <div class="conclusion" aria-live="polite" aria-atomic="true">
+          <p class="eyebrow" id="case-label">SOURCE EVIDENCE ONLY</p>
+          <h3 id="conclusion-title">A timeout leaves several explanations open.</h3>
+          <p id="conclusion-body">With only the source bundle, the tool does not attribute the failure to forwarding, policy, routing or the service.</p>
+          <p id="conclusion-limit" class="small">Adding router evidence can narrow the explanation; it cannot establish which route the source used.</p>
+          <div class="actions"><a class="primary" id="report-link" href="demo/source-only.html">Open the full report ↗</a><a id="json-link" href="demo/source-only.json">Inspect the JSON</a></div>
+          <p id="load-status" class="small" role="status"></p>
+        </div>
+      </div>
+      <div class="findings"><div class="section-head"><h3>Findings from the actual analyzer</h3><p>Rendered from the selected report's saved JSON.</p></div><div id="finding-list"></div></div>
+      <noscript><p>JavaScript is off. Open the recorded reports directly: <a href="demo/source-only.html">source only</a>, <a href="demo/paired.html">paired evidence</a>, <a href="demo/recovered.html">recovery</a>, <a href="demo/healthy.html">healthy control</a>, <a href="demo/shareable.html">export</a>.</p></noscript>
+    </section>
+
+    <section class="context" aria-labelledby="mechanism-title">
+      <div><p class="eyebrow">02 / HOW IT WORKS</p><h2 id="mechanism-title">Collect locally.<br>Investigate together.</h2><p>Run the CLI on the source and the selected Linux subnet router for one explicit destination. Combine the bounded JSON bundles into an offline report with evidence links and a concrete next check.</p><p>No configuration changes or application requests. Collection makes diagnostic probes; analysis and export work offline.</p><a href="https://github.com/balkashynov/connection-incident-workbench#try-it">Build and reproduce ↗</a></div>
+      <ol class="steps"><li><strong>Collect</strong><span>OS DNS, peer ping and explicit-IP TCP on the source; forwarding and direct TCP on the router.</span></li><li><strong>Correlate</strong><span>Match incident, destination, router identity and collection windows. Keep measured facts separate from hypotheses.</span></li><li><strong>Share</strong><span>Export pseudonymized evidence and a standalone report. Topology, timing, platform and ports remain visible.</span></li></ol>
+    </section>
+
+    <section class="boundary" aria-labelledby="boundary-title"><p class="eyebrow">03 / WHAT THE DEMO ESTABLISHES</p><h2 id="boundary-title">A controlled experiment, with visible limits.</h2><div class="boundary-grid"><div><h3>Executed</h3><p>Real Tailscale v1.104.1 daemons, Headscale 0.29.5 and a local DERP relay on one Docker host. The saved lab includes forwarding, DNS and TCP-refusal faults, each followed by recovery, plus an unprivileged LocalAPI check.</p><p>The five views above replay the forwarding experiment. The browser displays saved results; it does not run the probes.</p></div><div><h3>Still unverified</h3><p>Separate hosts and networks, the Tailscale service, native macOS daemon integration and IPv6 topology. Router selection is manual. The tool does not evaluate access policy, prove application health or inspect destination listeners.</p><p>The lab name comes from a hosts entry. QueryDNS fails even in the healthy control; this experiment does not validate MagicDNS.</p></div></div><a href="https://github.com/balkashynov/connection-incident-workbench/blob/codex/incident-demo/docs/VALIDATION.md">Read the complete validation record ↗</a></section>
+  </main>
+  <footer><p>Independent prototype for engineering feedback. No affiliation or adoption claimed.</p><nav aria-label="Further reading"><a href="https://github.com/balkashynov/connection-incident-workbench/blob/codex/incident-demo/docs/OVERLAP.md">Existing tools</a><a href="demo/manifest.json">Artifact hashes</a><a href="https://github.com/balkashynov/connection-incident-workbench">GitHub</a></nav></footer>
+</body>
+</html>

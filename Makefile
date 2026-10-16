@@ -11,3 +11,7 @@ lab: build
 .PHONY: demo
 demo: build
 	python3 scripts/demo.py
+
+.PHONY: web-demo
+web-demo: build
+	python3 scripts/build_demo.py

@@ -1,0 +1,36 @@
+{
+  "provenance": "Saved real-daemon lab observations, analyzed by the CLI. No new network probes.",
+  "rules": {
+    "healthy": [
+      "source.tcp_connected"
+    ],
+    "source-only": [
+      "source.tcp_unresolved"
+    ],
+    "paired": [
+      "router.forwarding_disabled",
+      "path.forwarding_hypothesis",
+      "source.tcp_unresolved"
+    ],
+    "recovered": [
+      "source.tcp_connected"
+    ],
+    "shareable": [
+      "router.forwarding_disabled",
+      "path.forwarding_hypothesis",
+      "source.tcp_unresolved"
+    ]
+  },
+  "sha256": {
+    "healthy.html": "91ac05df41210b64f374501fff52eb94a4b0b8462e4ed90593a28c00da309c0d",
+    "healthy.json": "39723bfc2606c371835bc01e52b0b3ce7c02d37fc1dd10290de0113164b39b53",
+    "paired.html": "39043bb0e611fc0b06d97bb3a0280059662206153974ba5092c9ae26fca7fcfd",
+    "paired.json": "dbaef42d3b27602c35fcef19e31b6d0f3c987c23b4449f5718093e386b6f7a39",
+    "recovered.html": "c0bf1b04e39ef2023fcf2344a5651522e3a8b0d42c4271316b68c707a690b70e",
+    "recovered.json": "024ac08eb1d954f5999727e65854bafff445e0d90710a0bc43b2c00f2d348dae",
+    "shareable.html": "e91c72b6bbede173d1d33e9c5e0e06b10d39e471a6bbb80f1e2d69315817603f",
+    "shareable.json": "22e43395c465c0cfe71e3e9dfeb911acbffab98f7ad93734b07e8edb59dcb6f5",
+    "source-only.html": "a0ef6644a638dc75cad534d3a4775bc1bb77fdb348b8fb40f35ed2d363803573",
+    "source-only.json": "297ab8be2597a5ae324efa120884bc0ab65a4418ec16bd5be0b3d91a07a95dd2"
+  }
+}

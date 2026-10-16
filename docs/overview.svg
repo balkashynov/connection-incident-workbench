@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">A ping works. The connection does not.</title>
+  <desc id="desc">Source-only evidence leaves a TCP timeout unexplained. Paired router evidence shows forwarding disabled while the router can reach the destination, supporting a conditional explanation.</desc>
+  <rect width="1200" height="440" rx="16" fill="#102c34"/>
+  <g font-family="Arial, sans-serif">
+    <text x="52" y="55" fill="#8dd8cd" font-size="15" letter-spacing="3">CONNECTION INCIDENT WORKBENCH</text>
+    <text x="52" y="114" fill="#f3f8f7" font-size="42" font-weight="700">A ping works. The connection doesn't.</text>
+    <text x="52" y="151" fill="#bed0d4" font-size="20">Bring source and subnet-router evidence into the same investigation.</text>
+    <path d="M348 262H432M764 262H848" stroke="#6c9199" stroke-width="2" stroke-dasharray="6 6"/>
+    <g fill="#183b44" stroke="#54757e"><rect x="52" y="201" width="296" height="131" rx="9"/><rect x="432" y="201" width="332" height="131" rx="9"/><rect x="848" y="201" width="300" height="131" rx="9"/></g>
+    <g fill="#bed0d4" font-size="14" letter-spacing="2"><text x="76" y="234">SOURCE</text><text x="456" y="234">SUBNET ROUTER</text><text x="872" y="234">DESTINATION</text></g>
+    <g fill="#f3f8f7" font-size="23" font-weight="700"><text x="76" y="273">TCP timed out</text><text x="456" y="273">Forwarding disabled</text><text x="872" y="273">Router TCP connects</text></g>
+    <g fill="#bed0d4" font-size="16"><text x="76" y="305">Peer ping succeeded</text><text x="456" y="305">Measured on the selected router</text><text x="872" y="305">Application health untested</text></g>
+    <text x="52" y="387" fill="#8dd8cd" font-size="18">One destination. Two evidence bundles. A report you can inspect and share.</text>
+    <text x="52" y="416" fill="#bed0d4" font-size="14">Recorded lab case • Route selection remains unverified • Independent prototype</text>
+  </g>
+</svg>
